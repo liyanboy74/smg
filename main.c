@@ -15,7 +15,7 @@ const char * XML_HEADER=(char*)&\
 <urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
 const char * XML_FOOTER=(char*)&"</urlset>\n";
 
-void add_link(char *Buffer)
+int add_link(char *Buffer)
 {
     if(!status)
     {
@@ -24,8 +24,12 @@ void add_link(char *Buffer)
         {
             status++;
             fwrite(XML_HEADER,strlen(XML_HEADER),1,fs);
-            add_link(SITE_NAME);
-            add_link(Buffer);
+            return(add_link(SITE_NAME)|add_link(Buffer));
+        }
+        else
+        {
+            printf("ERROR: Can't open [%s] file!\n",file_name);
+            return -1;
         }
     }
     else
@@ -39,6 +43,7 @@ void add_link(char *Buffer)
         fwrite("\t</url>\n",8,1,fs);
         puts(Buffer);
     }
+    return 0;
 }
 
 void check_file()
@@ -59,8 +64,7 @@ static int parse_opt(int key,char *arg,struct argp_state *state)
         case 'd':
         {
             sprintf(DIR,"%s/%s",SITE_NAME,arg);
-            add_link(DIR);
-            break;
+            return add_link(DIR);
         }
         case 'n':
         {
@@ -70,8 +74,7 @@ static int parse_opt(int key,char *arg,struct argp_state *state)
         case 'p':
         {
             sprintf(BUFFER,"%s/%s",DIR,arg);
-            add_link(BUFFER);
-            break;
+            return add_link(BUFFER);
         }
         case ARGP_KEY_ARG:
         {
