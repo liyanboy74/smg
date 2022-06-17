@@ -10,6 +10,8 @@ FILE *fs;
 char *file_name=(char*)&"sitemap.xml";
 int status=0;
 
+int link_c=0;
+
 const char * XML_HEADER=(char*)&\
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\
 <urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
@@ -41,7 +43,8 @@ int add_link(char *Buffer)
         fwrite("</loc>\n",7,1,fs);
 
         fwrite("\t</url>\n",8,1,fs);
-        puts(Buffer);
+
+        printf("%03d: %s\n",++link_c,Buffer);
     }
     return 0;
 }
