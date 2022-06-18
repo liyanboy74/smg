@@ -1,3 +1,9 @@
+/*
+ SMG
+ By Liyanboy74
+ https://github.com/liyanboy74/smg
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <argp.h>
