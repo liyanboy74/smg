@@ -13,10 +13,11 @@ Example: smg -s test.com -d blog -p help
 ### Build
 ```
 git clone --recursive https://github.com/liyanboy74/smg.git
-#Build Submodule or replase release.
+#Build Submodule or replace release.
 cd smg
 mkdir build
 cd build
 cmake -G "Unix Makefiles" ..
 make
+sudo make install
 ```
