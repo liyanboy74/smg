@@ -69,7 +69,12 @@ static int parse_opt(int key,char *arg,struct argp_state *state)
 {
     switch(key)
     {
-        case 's':SITE_NAME=arg;break;
+        case 's':
+        {
+            SITE_NAME=arg;
+            sprintf(DIR,"%s",SITE_NAME);
+            break;
+        }
         case 'd':
         {
             sprintf(DIR,"%s/%s",SITE_NAME,arg);
