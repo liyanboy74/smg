@@ -10,3 +10,13 @@ Example: smg -s test.com -d blog -p help
 -?, --help                 Give this help list
     --usage                Give a short usage message
 ```
+### Build
+```
+git clone --recursive https://github.com/liyanboy74/smg.git
+#Build Submodule or replase release.
+cd smg
+mkdir build
+cd build
+cmake -G "Unix Makefiles" ..
+make
+```
