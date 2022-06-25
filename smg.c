@@ -17,6 +17,7 @@ char *file_name=(char*)&"sitemap.xml";
 int status=0;
 
 int link_c=0;
+int echo=0;
 
 const char * XML_HEADER=(char*)&\
 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\
@@ -50,7 +51,7 @@ int add_link(char *Buffer)
 
         fwrite("\t</url>\n",8,1,fs);
 
-        printf("%03d: %s\n",++link_c,Buffer);
+        if(echo)printf("%03d: %s\n",++link_c,Buffer);
     }
     return 0;
 }
@@ -80,20 +81,13 @@ static int parse_opt(int key,char *arg,struct argp_state *state)
             sprintf(DIR,"%s/%s",SITE_NAME,arg);
             return add_link(DIR);
         }
-        case 'n':
-        {
-            file_name=arg;
-            break;
-        }
+        case 'n':file_name=arg;break;
         case 'p':
         {
             sprintf(BUFFER,"%s/%s",DIR,arg);
             return add_link(BUFFER);
         }
-        case ARGP_KEY_ARG:
-        {
-            return parse_opt('p',arg,state);
-        }
+        case 'e':echo=1;break;
         case ARGP_KEY_END:
         {
             check_file();
@@ -104,6 +98,10 @@ static int parse_opt(int key,char *arg,struct argp_state *state)
             sprintf(DIR,"%s",SITE_NAME);
             break;
         }
+        // case ARGP_KEY_ARG:
+        // {
+        //     return parse_opt('p',arg,state);
+        // }
     }
     return 0;
 }
@@ -116,6 +114,7 @@ int main(int argc,char **argv)
         {"post",'p',"POST",0,"add post"},
         {"dir",'d',"DIR",0,"change dir"},
         {"name",'n',"FILE",0,"rename output file"},
+        {"echo",'e',0,0,"echo links"},
         {0}
     };
     struct argp argp={option,parse_opt,"SMG - Site Map Generator","Example: smg -s test.com -d blog -p help"};
