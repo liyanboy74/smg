@@ -47,7 +47,7 @@ int add_link(char *Buffer)
 
         fwrite("\t\t<loc>",7,1,fs);
         fwrite(Buffer,strlen(Buffer),1,fs);
-        fwrite("/</loc>\n",7,1,fs);
+        fwrite("/</loc>\n",8,1,fs);
 
         fwrite("\t</url>\n",8,1,fs);
 
