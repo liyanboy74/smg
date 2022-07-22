@@ -51,7 +51,7 @@ int add_link(char *Buffer)
 
         fwrite("\t</url>\n",8,1,fs);
 
-        if(echo)printf("%03d: %s\n",++link_c,Buffer);
+        if(echo)printf("%03d: %s/\n",++link_c,Buffer);
     }
     return 0;
 }
