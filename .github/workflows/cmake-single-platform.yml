@@ -35,7 +35,7 @@ jobs:
       run: ./build/smg --help
 
     - name: Test
-      run: ./build/smg -d .. -s test.com -d blog -p help
+      run: ./build/smg -s test.com -d blog -p help
 
     - name: Info
       run: cat sitemap.xml
